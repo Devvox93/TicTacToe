@@ -44,5 +44,8 @@
 -(IBAction)setMark: (id)sender;
 -(void)setMark2;
 -(Boolean)checkIfWon:(NSString*)playerType;
--(IBAction)setRandomMark:(id)sender;
+-(IBAction)setRandomMark:(id)sender;	
+-(void) vulVakje:(int)nummer :(NSString*)inhoud;
+-(NSString*) getVakje:(int)nummer;
+-(void) slimmeZet;
 @end

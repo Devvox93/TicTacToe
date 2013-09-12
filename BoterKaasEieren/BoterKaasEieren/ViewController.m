@@ -29,6 +29,7 @@
 
 -(IBAction)init:(id)sender
 {
+    NSLog(@"Woot init!");
     if(!gewonnen && !gelijkspel)
     {
         vakjesLijst = [[NSMutableArray alloc]init];
@@ -64,7 +65,7 @@
             {
                 return;
             }
-            [self setMark2];
+            [self slimmeZet];
         }
     }
 }
@@ -78,6 +79,206 @@
         r = random() % 9;
     }
     [[vakjesLijst objectAtIndex:r] setTitle:@"O" forState:(UIControlStateNormal)];
+}
+
+-(void) vulVakje:(int)nummer :(NSString *)inhoud {
+    NSLog(@"Vakje %i: %@", nummer, inhoud);
+    [[vakjesLijst objectAtIndex:nummer] setTitle:inhoud forState:(UIControlStateNormal)];
+}
+
+-(NSString*)getVakje:(int)nummer {
+    return [[vakjesLijst objectAtIndex:nummer] currentTitle];
+}
+
+-(void)slimmeZet{
+    NSLog(@"Slimme zet begin");
+    //check voor een horizontale zet waarmee de cpu wint
+    //rij 1
+    if([self getVakje:0] == nil &&  [[self getVakje:1] isEqual: @"O"] && [[self getVakje:2] isEqual: @"O"])
+    {
+        [self vulVakje: 0: @"O"];
+    } else if([[self getVakje:0] isEqual: @"O"] &&  [self getVakje:1] == nil && [[self getVakje:2] isEqual: @"O"])
+    {
+        [self vulVakje: 1: @"O"];
+    } else if([[self getVakje:0] isEqual: @"O"] &&  [[self getVakje:1] isEqual: @"O"] && [self getVakje:2] == nil)
+    {
+        [self vulVakje: 2: @"O"];
+    }
+    //rij 2
+    else if([self getVakje:3] == nil &&  [[self getVakje:4] isEqual: @"O"] && [[self getVakje:5] isEqual: @"O"])
+    {
+        [self vulVakje: 3: @"O"];
+    } else if([[self getVakje:3] isEqual: @"O"] &&  [self getVakje:4] == nil && [[self getVakje:5] isEqual: @"O"])
+    {
+        [self vulVakje: 4: @"O"];
+    } else if([[self getVakje:3] isEqual: @"O"] &&  [[self getVakje:4] isEqual: @"O"] && [self getVakje:5] == nil)
+    {
+        [self vulVakje: 5: @"O"];
+    }
+    //rij 3
+    else if([self getVakje:6] == nil &&  [[self getVakje:7] isEqual: @"O"] && [[self getVakje:8] isEqual: @"O"])
+    {
+        [self vulVakje: 6: @"O"];
+    } else if([[self getVakje:6] isEqual: @"O"] &&  [self getVakje:7] == nil && [[self getVakje:8] isEqual: @"O"])
+    {
+        [self vulVakje: 7: @"O"];
+    } else if([[self getVakje:6] isEqual: @"O"] &&  [[self getVakje:7] isEqual: @"O"] && [self getVakje:8] == nil)
+    {
+        [self vulVakje: 8: @"O"];
+    }
+    //check voor een verticale zet waarmee de cpu wint
+    //rij 1
+    else if([self getVakje:0] == nil &&  [[self getVakje:3] isEqual: @"O"] && [[self getVakje:6] isEqual: @"O"])
+    {
+        [self vulVakje: 0: @"O"];
+    } else if([[self getVakje:0] isEqual: @"O"] &&  [self getVakje:3] == nil && [[self getVakje:6] isEqual: @"O"])
+    {
+        [self vulVakje: 3: @"O"];
+    } else if([[self getVakje:0] isEqual: @"O"] &&  [[self getVakje:3] isEqual: @"O"] && [self getVakje:6] == nil)
+    {
+        [self vulVakje: 6: @"O"];
+    }
+    //rij 2
+    else if([self getVakje:1] == nil &&  [[self getVakje:4] isEqual: @"O"] && [[self getVakje:7] isEqual: @"O"])
+    {
+        [self vulVakje: 1: @"O"];
+    } else if([[self getVakje:1] isEqual: @"O"] &&  [self getVakje:4] == nil && [[self getVakje:7] isEqual: @"O"])
+    {
+        [self vulVakje: 4: @"O"];
+    } else if([[self getVakje:1] isEqual: @"O"] &&  [[self getVakje:4] isEqual: @"O"] && [self getVakje:7] == nil)
+    {
+        [self vulVakje: 7: @"O"];
+    }
+    //rij 3
+    else if([self getVakje:2] == nil &&  [[self getVakje:5] isEqual: @"O"] && [[self getVakje:8] isEqual: @"O"])
+    {
+        [self vulVakje: 2: @"O"];
+    } else if([[self getVakje:2] isEqual: @"O"] &&  [self getVakje:5] == nil && [[self getVakje:8] isEqual: @"O"])
+    {
+        [self vulVakje: 5: @"O"];
+    } else if([[self getVakje:2] isEqual: @"O"] &&  [[self getVakje:5] isEqual: @"O"] && [self getVakje:8] == nil)
+    {
+        [self vulVakje: 8: @"O"];
+    }
+    //check voor een / zet waarmee de cpu wint
+    else if ([self getVakje:2] == nil && [[self getVakje:4] isEqual: @"O"] && [[self getVakje:6] isEqual: @"O"])
+    {
+        [self vulVakje: 2: @"O"];
+    } else if ([[self getVakje:2] isEqual: @"O"] && [self getVakje:4] == nil && [[self getVakje:6] isEqual: @"O"])
+    {
+        [self vulVakje: 4: @"O"];
+    } else if ([[self getVakje:2] isEqual: @"O"] && [[self getVakje:4] isEqual: @"O"] && [self getVakje:6] == nil)
+    {
+        [self vulVakje: 6: @"O"];
+    }
+    //check voor een \ zet waarmee de cpu wint
+    else if ([self getVakje:0] == nil && [[self getVakje:4] isEqual: @"O"] && [[self getVakje:8] isEqual: @"O"])
+    {
+        [self vulVakje: 0: @"O"];
+    } else if ([[self getVakje:0] isEqual: @"O"] && [self getVakje:4] == nil && [[self getVakje:8] isEqual: @"O"])
+    {
+        [self vulVakje: 4: @"O"];
+    } else if ([[self getVakje:0] isEqual: @"O"] && [[self getVakje:4] isEqual: @"O"] && [self getVakje:8] == nil)
+    {
+        [self vulVakje: 8: @"O"];
+    }
+    //check voor een horizontale zet waarmee speler zou winnen, en blokkeer die zet
+    //rij 1
+    else if ([self getVakje:0] == nil && [[self getVakje:1] isEqual: @"X"] && [[self getVakje:2] isEqual: @"X"])
+    {
+        [self vulVakje: 0: @"O"];
+    } else if ([[self getVakje:0] isEqual: @"X"] && [self getVakje:1] == nil && [[self getVakje:2] isEqual: @"X"])
+    {
+        [self vulVakje: 1: @"O"];
+    } else if ([[self getVakje:0] isEqual: @"X"] && [[self getVakje:1] isEqual: @"X"] && [self getVakje:2] == nil)
+    {
+        [self vulVakje: 2: @"O"];
+    }
+    //rij 2
+    else if ([self getVakje:3] == nil && [[self getVakje:4] isEqual: @"X"] && [[self getVakje:5] isEqual: @"X"])
+    {
+        [self vulVakje: 3: @"O"];
+    } else if ([[self getVakje:3] isEqual: @"X"] && [self getVakje:4] == nil && [[self getVakje:5] isEqual: @"X"])
+    {
+        [self vulVakje: 4: @"O"];
+    } else if ([[self getVakje:3] isEqual: @"X"] && [[self getVakje:4] isEqual: @"X"] && [self getVakje:5] == nil)
+    {
+        [self vulVakje: 5: @"O"];
+    }
+    //rij 3
+    else if ([self getVakje:6] == nil && [[self getVakje:7] isEqual: @"X"] && [[self getVakje:8] isEqual: @"X"])
+    {
+        [self vulVakje: 6: @"O"];
+    } else if ([[self getVakje:6] isEqual: @"X"] && [self getVakje:7] == nil && [[self getVakje:8] isEqual: @"X"])
+    {
+        [self vulVakje: 7: @"O"];
+    } else if ([[self getVakje:6] isEqual: @"X"] && [[self getVakje:7] isEqual: @"X"] && [self getVakje:8] == nil)
+    {
+        [self vulVakje: 8: @"O"];
+    }
+    //check voor een verticale zet waarmee speler zou winnen, en blokkeer die zet
+    //rij 1
+    else if ([self getVakje:0] == nil && [[self getVakje:3] isEqual: @"X"] && [[self getVakje:6] isEqual: @"X"])
+    {
+        [self vulVakje: 0: @"O"];
+    } else if ([[self getVakje:0] isEqual: @"X"] && [self getVakje:3] == nil && [[self getVakje:6] isEqual: @"X"])
+    {
+        [self vulVakje: 3: @"O"];
+    } else if ([[self getVakje:0] isEqual: @"X"] && [[self getVakje:3] isEqual: @"X"] && [self getVakje:6] == nil)
+    {
+        [self vulVakje: 6: @"O"];
+    }
+    //rij 2
+    else if ([self getVakje:1] == nil && [[self getVakje:4] isEqual: @"X"] && [[self getVakje:7] isEqual: @"X"])
+    {
+        [self vulVakje: 1: @"O"];
+    } else if ([[self getVakje:1] isEqual: @"X"] && [self getVakje:4] == nil && [[self getVakje:7] isEqual: @"X"])
+    {
+        [self vulVakje: 4: @"O"];
+    } else if ([[self getVakje:1] isEqual: @"X"] && [[self getVakje:4] isEqual: @"X"] && [self getVakje:7] == nil)
+    {
+        [self vulVakje: 7: @"O"];
+    }
+    //rij 3
+    else if ([self getVakje:2] == nil && [[self getVakje:5] isEqual: @"X"] && [[self getVakje:8] isEqual: @"X"])
+    {
+        [self vulVakje: 2: @"O"];
+    } else if ([[self getVakje:2] isEqual: @"X"] && [self getVakje:5] == nil && [[self getVakje:8] isEqual: @"X"])
+    {
+        [self vulVakje: 5: @"O"];
+    } else if ([[self getVakje:2] isEqual: @"X"] && [[self getVakje:5] isEqual: @"X"] && [self getVakje:8] == nil)
+    {
+        [self vulVakje: 8: @"O"];
+    }
+    
+    //check voor een / zet waarmee speler zou winnen, en blokkeer die zet
+    else if ([self getVakje:2] == nil && [[self getVakje:4] isEqual: @"X"] && [[self getVakje:6] isEqual: @"X"])
+    {
+        [self vulVakje: 2: @"O"];
+    } else if ([[self getVakje:2] isEqual: @"X"] && [self getVakje:4] == nil && [[self getVakje:6] isEqual: @"X"])
+    {
+        [self vulVakje: 4: @"O"];
+    } else if ([[self getVakje:2] isEqual: @"X"] && [[self getVakje:4] isEqual: @"X"] && [self getVakje:6] == nil)
+    {
+        [self vulVakje: 6: @"O"];
+    }
+    
+    //check voor een \ zet waarmee speler zou winnen, en blokkeer die zet
+    else if ([self getVakje:0] == nil && [[self getVakje:4] isEqual: @"X"] && [[self getVakje:8] isEqual: @"X"])
+    {
+        [self vulVakje: 0: @"O"];
+    } else if ([[self getVakje:0] isEqual: @"X"] && [self getVakje:4] == nil && [[self getVakje:8] isEqual: @"X"])
+    {
+        [self vulVakje: 4: @"O"];
+    } else if ([[self getVakje:0] isEqual: @"X"] && [[self getVakje:4] isEqual: @"X"] && [self getVakje:8] == nil)
+    {
+        [self vulVakje: 8: @"O"];
+    }
+    
+    else {
+        NSLog(@"Slimme zet niet gelukt, random nu!");
+        [self setMark2];
+    }
     aantalZetten++;
     [self checkIfWon:@"O"];
 }
@@ -102,10 +303,10 @@
     }
     for(int i = 0; i<3; i++)
     {
-        NSLog(@"1");
+        //NSLog(@"1");
         for(int ii = i; ii<9; ii =ii+3)
         {
-            NSLog(@"2");
+            //NSLog(@"2");
             if([[vakjesLijst objectAtIndex:ii] currentTitle] == playerType)
             {
                 hoeveelheidGemarkeerdeVakjes++;
@@ -123,10 +324,10 @@
     
     for(int i = 0; i<9; i=i+3)
     {
-        NSLog(@"3");
+        //NSLog(@"3");
         for(int ii = i; ii<i+3; ii++)
         {
-            NSLog(@"4");
+            //NSLog(@"4");
             if([[vakjesLijst objectAtIndex:ii] currentTitle] == playerType)
             {
                 hoeveelheidGemarkeerdeVakjes++;
@@ -146,9 +347,9 @@
 
 -(IBAction)setRandomMark:(id)sender
 {
-
-        //[sender setTitle:@"X" forState:(UIControlStateNormal)];
-        //[(PointPtr)stringArray[2][0] setTitle:@"X" forState:(UIControlStateNormal)];
+    
+    //[sender setTitle:@"X" forState:(UIControlStateNormal)];
+    //[(PointPtr)stringArray[2][0] setTitle:@"X" forState:(UIControlStateNormal)];
     //[[vakjesLijst objectAtIndex:2] setTitle:@"X" forState:(UIControlStateNormal)];
     //NSLog(@"%@", [vakjesLijst objectAtIndex:2]);
 }
@@ -156,6 +357,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self init:nil];
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
