@@ -26,6 +26,8 @@
 @synthesize btn7;
 @synthesize btn8;
 @synthesize btn9;
+@synthesize label;
+@synthesize beatable;
 
 -(IBAction)init:(id)sender
 {
@@ -50,6 +52,7 @@
         gewonnen = false;
         gelijkspel = false;
         aantalZetten = 0;
+        label.text = @"Speler aan zet.";
     }
 }
 
@@ -92,6 +95,11 @@
 
 -(void)slimmeZet{
     NSLog(@"Slimme zet begin");
+    
+    BOOL beatme = NO;
+    if([beatable selectedSegmentIndex] != 0) {
+        beatme = YES;
+    }
     //check voor een horizontale zet waarmee de cpu wint
     //rij 1
     if([self getVakje:0] == nil &&  [[self getVakje:1] isEqual: @"O"] && [[self getVakje:2] isEqual: @"O"])
@@ -275,6 +283,21 @@
         [self vulVakje: 8: @"O"];
     }
     
+    //probeer het midden te vullen
+    else if(beatme && [self getVakje:4] == nil) {
+        [self vulVakje:4 :@"O"];
+    }
+    //probeer een hoek te vullen
+    else if(beatme && [self getVakje:0] == nil) {
+        [self vulVakje:0 :@"O"];
+    } else if(beatme && [self getVakje:2] == nil) {
+        [self vulVakje:2 :@"O"];
+    } else if(beatme && [self getVakje:6] == nil) {
+        [self vulVakje:6 :@"O"];
+    } else if(beatme && [self getVakje:8] == nil) {
+        [self vulVakje:8 :@"O"];
+    }
+    //geen slimme zet, random
     else {
         NSLog(@"Slimme zet niet gelukt, random nu!");
         [self setMark2];
@@ -289,6 +312,7 @@
     int hoeveelheidGemarkeerdeVakjes = 0;
     if(aantalZetten >8)
     {
+        [label setText:@"Gelijkspel!"];
         NSLog(@"Gelijkspel");
         [btnPlay setTitle:@"Speel nog een keer" forState: (UIControlStateNormal)];
         gelijkspel = true;
@@ -296,6 +320,9 @@
     }
     if(([[vakjesLijst objectAtIndex:0] currentTitle] == playerType && [[vakjesLijst objectAtIndex:4] currentTitle] == playerType & [[vakjesLijst objectAtIndex:8] currentTitle] == playerType) || ([[vakjesLijst objectAtIndex:2] currentTitle] == playerType && [[vakjesLijst objectAtIndex:4] currentTitle] == playerType && [[vakjesLijst objectAtIndex:6] currentTitle] == playerType))
     {
+        NSString *temp = [[NSString alloc] initWithFormat:@"Hoera speler %@ heeft gewonnen", playerType];
+        [label setText:temp];
+        [temp release];
         NSLog(@"Hoera speler %@ heeft gewonnen", playerType);
         [btnPlay setTitle:@"Speel nog een keer" forState: (UIControlStateNormal)];
         gewonnen = true;
@@ -314,6 +341,9 @@
         }
         if(hoeveelheidGemarkeerdeVakjes == 3)
         {
+            NSString *temp = [[NSString alloc] initWithFormat:@"Hoera speler %@ heeft gewonnen", playerType];
+            [label setText:temp];
+            [temp release];
             NSLog(@"Hoera speler %@ heeft gewonnen", playerType);
             [btnPlay setTitle:@"Speel nog een keer" forState: (UIControlStateNormal)];
             gewonnen = true;
@@ -337,6 +367,9 @@
         {
             [btnPlay setTitle:@"Speel nog een keer" forState: (UIControlStateNormal)];
             NSLog(@"Hoera speler %@ heeft gewonnen", playerType);
+            NSString *temp = [[NSString alloc] initWithFormat:@"Hoera speler %@ heeft gewonnen", playerType];
+            [label setText:temp];
+            [temp release];
             gewonnen = true;
             return true;
         }

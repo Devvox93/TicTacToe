@@ -156,13 +156,22 @@
                                     <action selector="init:" destination="2" eventType="touchUpInside" id="VJZ-h3-454"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Speler aan zet." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rhi-7X-qTU">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="NEa-y7-hFU">
+                                <segments>
+                                    <segment title="Beatable"/>
+                                    <segment title="Unbeatable"/>
+                                </segments>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="feU-XX-nEM" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="6xz-ul-BCx"/>
-                            <constraint firstItem="wVQ-1z-dgN" firstAttribute="top" secondItem="oXg-lt-oRo" secondAttribute="top" type="default" id="9Nf-72-RYG"/>
                             <constraint firstItem="p1O-PH-XGO" firstAttribute="trailing" secondItem="J6A-l5-LT9" secondAttribute="trailing" type="default" id="9dl-hn-E37"/>
-                            <constraint firstItem="oXg-lt-oRo" firstAttribute="top" secondItem="p1O-PH-XGO" secondAttribute="top" type="default" id="BLL-9C-ZqR"/>
                             <constraint firstItem="bmW-9C-gb2" firstAttribute="trailing" secondItem="7dl-Vs-Gqf" secondAttribute="trailing" type="default" id="CaF-42-EDa"/>
                             <constraint firstItem="bmW-9C-gb2" firstAttribute="leading" secondItem="7dl-Vs-Gqf" secondAttribute="leading" type="default" id="DNr-6X-VJ3"/>
                             <constraint firstItem="feU-XX-nEM" firstAttribute="top" secondItem="3" secondAttribute="top" type="default" id="Duh-dS-Da9"/>
@@ -171,27 +180,36 @@
                             <constraint firstItem="Uj2-uJ-5Cu" firstAttribute="leading" secondItem="oXg-lt-oRo" secondAttribute="leading" type="default" id="HNV-RT-rTc"/>
                             <constraint firstItem="jXQ-8r-XxF" firstAttribute="top" secondItem="3" secondAttribute="top" constant="88" id="HRJ-NE-AqP"/>
                             <constraint firstItem="Uj2-uJ-5Cu" firstAttribute="top" secondItem="J6A-l5-LT9" secondAttribute="top" type="default" id="Imx-lh-2u6"/>
+                            <constraint firstAttribute="trailing" secondItem="rhi-7X-qTU" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="OVx-5u-9rc"/>
                             <constraint firstItem="8u0-hX-Q5X" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="134" id="PSc-kf-aJB"/>
                             <constraint firstItem="J6A-l5-LT9" firstAttribute="top" secondItem="3" secondAttribute="top" constant="156" id="PVv-cL-ucC"/>
                             <constraint firstItem="gH0-7i-dSH" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="PhA-3x-krK"/>
                             <constraint firstItem="bmW-9C-gb2" firstAttribute="top" secondItem="8u0-hX-Q5X" secondAttribute="top" type="default" id="TzA-ba-323"/>
                             <constraint firstItem="gH0-7i-dSH" firstAttribute="bottom" secondItem="3" secondAttribute="bottom" type="default" id="Uwk-tb-s03"/>
+                            <constraint firstItem="NEa-y7-hFU" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="ViH-4F-ySL"/>
+                            <constraint firstItem="rhi-7X-qTU" firstAttribute="top" secondItem="p1O-PH-XGO" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="ZKg-Pb-oH3"/>
                             <constraint firstItem="jXQ-8r-XxF" firstAttribute="trailing" secondItem="J6A-l5-LT9" secondAttribute="trailing" type="default" id="axb-v7-agk"/>
                             <constraint firstItem="p1O-PH-XGO" firstAttribute="top" secondItem="3" secondAttribute="top" constant="224" id="bhb-Me-Eqv"/>
                             <constraint firstItem="p1O-PH-XGO" firstAttribute="leading" secondItem="J6A-l5-LT9" secondAttribute="leading" type="default" id="bkP-bg-fgt"/>
+                            <constraint firstItem="rhi-7X-qTU" firstAttribute="top" secondItem="wVQ-1z-dgN" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="dAB-hr-z9V"/>
                             <constraint firstItem="Uj2-uJ-5Cu" firstAttribute="leading" secondItem="8u0-hX-Q5X" secondAttribute="leading" type="default" id="dns-yA-P8c"/>
                             <constraint firstItem="wVQ-1z-dgN" firstAttribute="leading" secondItem="7dl-Vs-Gqf" secondAttribute="leading" type="default" id="e6y-Jw-pDo"/>
                             <constraint firstItem="feU-XX-nEM" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="fIW-RF-oKz"/>
                             <constraint firstItem="8u0-hX-Q5X" firstAttribute="top" secondItem="jXQ-8r-XxF" secondAttribute="top" type="default" id="fgh-Dl-qhD"/>
+                            <constraint firstItem="rhi-7X-qTU" firstAttribute="top" secondItem="oXg-lt-oRo" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="hxm-2H-wBw"/>
                             <constraint firstAttribute="trailing" secondItem="bmW-9C-gb2" secondAttribute="trailing" constant="54" id="k1q-i6-ihj"/>
+                            <constraint firstItem="gH0-7i-dSH" firstAttribute="top" secondItem="NEa-y7-hFU" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="njF-4c-5gW"/>
                             <constraint firstItem="8u0-hX-Q5X" firstAttribute="trailing" secondItem="Uj2-uJ-5Cu" secondAttribute="trailing" type="default" id="p6z-hX-Kup"/>
                             <constraint firstItem="jXQ-8r-XxF" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="43" id="pOe-JM-eu3"/>
                             <constraint firstItem="7dl-Vs-Gqf" firstAttribute="trailing" secondItem="wVQ-1z-dgN" secondAttribute="trailing" type="default" id="rmB-8b-X9Y"/>
+                            <constraint firstItem="rhi-7X-qTU" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="sUw-2B-F9b"/>
+                            <constraint firstAttribute="trailing" secondItem="NEa-y7-hFU" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="w3m-g2-UMv"/>
                             <constraint firstItem="J6A-l5-LT9" firstAttribute="leading" secondItem="jXQ-8r-XxF" secondAttribute="leading" type="default" id="xgB-QL-pP2"/>
                             <constraint firstItem="Uj2-uJ-5Cu" firstAttribute="trailing" secondItem="oXg-lt-oRo" secondAttribute="trailing" type="default" id="y7n-Cc-qgL"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="beatable" destination="NEa-y7-hFU" id="M2D-91-OQg"/>
                         <outlet property="btn1" destination="jXQ-8r-XxF" id="GBD-je-CUY"/>
                         <outlet property="btn2" destination="8u0-hX-Q5X" id="lpv-Af-G9C"/>
                         <outlet property="btn3" destination="bmW-9C-gb2" id="AEG-cw-ge8"/>
@@ -202,6 +220,7 @@
                         <outlet property="btn8" destination="oXg-lt-oRo" id="67j-L3-JRL"/>
                         <outlet property="btn9" destination="wVQ-1z-dgN" id="UKv-sC-Xqr"/>
                         <outlet property="btnPlay" destination="gH0-7i-dSH" id="8bx-nA-lLt"/>
+                        <outlet property="label" destination="rhi-7X-qTU" id="Jea-jq-oxB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
@@ -218,6 +237,7 @@
                 <relationship kind="action" name="init:"/>
                 <relationship kind="action" name="setMark:"/>
                 <relationship kind="action" name="setRandomMark:"/>
+                <relationship kind="outlet" name="beatable" candidateClass="UISegmentedControl"/>
                 <relationship kind="outlet" name="btn1" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="btn2" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="btn3" candidateClass="UIButton"/>
@@ -228,6 +248,7 @@
                 <relationship kind="outlet" name="btn8" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="btn9" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="btnPlay" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="label" candidateClass="UILabel"/>
             </relationships>
         </class>
     </classes>

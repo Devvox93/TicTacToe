@@ -26,6 +26,8 @@
     UIButton * btn7;
     UIButton * btn8;
     UIButton * btn9;
+    UILabel * label;
+    UISegmentedControl * beatable;
 }
 @property(nonatomic, assign)int aantalZetten;
 @property(nonatomic, assign)Boolean gelijkspel;
@@ -40,11 +42,13 @@
 @property(nonatomic, retain)IBOutlet UIButton * btn7;
 @property(nonatomic, retain)IBOutlet UIButton * btn8;
 @property(nonatomic, retain)IBOutlet UIButton * btn9;
+@property (nonatomic, retain) IBOutlet UILabel * label;
+@property (nonatomic, retain) IBOutlet UISegmentedControl * beatable;
 -(IBAction)init:(id)sender;
 -(IBAction)setMark: (id)sender;
 -(void)setMark2;
 -(Boolean)checkIfWon:(NSString*)playerType;
--(IBAction)setRandomMark:(id)sender;	
+-(IBAction)setRandomMark:(id)sender;
 -(void) vulVakje:(int)nummer :(NSString*)inhoud;
 -(NSString*) getVakje:(int)nummer;
 -(void) slimmeZet;
