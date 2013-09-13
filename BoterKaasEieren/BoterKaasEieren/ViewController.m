@@ -31,29 +31,32 @@
 
 -(IBAction)init:(id)sender
 {
-    NSLog(@"Woot init!");
-    if(!gewonnen && !gelijkspel)
+    vakjesLijst = [[NSMutableArray alloc]init];
+    [vakjesLijst addObject:btn1];
+    [vakjesLijst addObject:btn2];
+    [vakjesLijst addObject:btn3];
+    [vakjesLijst addObject:btn4];
+    [vakjesLijst addObject:btn5];
+    [vakjesLijst addObject:btn6];
+    [vakjesLijst addObject:btn7];
+    [vakjesLijst addObject:btn8];
+    [vakjesLijst addObject:btn9];
+    label.text = @"Speler begint.";
+}
+
+
+
+-(IBAction)reset:(id)sender
+{
+    NSLog(@"Game gereset!");
+    for(int i =0; i<[vakjesLijst count]; i++)
     {
-        vakjesLijst = [[NSMutableArray alloc]init];
-        [vakjesLijst addObject:btn1];
-        [vakjesLijst addObject:btn2];
-        [vakjesLijst addObject:btn3];
-        [vakjesLijst addObject:btn4];
-        [vakjesLijst addObject:btn5];
-        [vakjesLijst addObject:btn6];
-        [vakjesLijst addObject:btn7];
-        [vakjesLijst addObject:btn8];
-        [vakjesLijst addObject:btn9];
-    }else{
-        for(int i =0; i<[vakjesLijst count]; i++)
-        {
-            [[vakjesLijst objectAtIndex:i] setTitle:nil forState:(UIControlStateNormal)];
-        }
-        gewonnen = false;
-        gelijkspel = false;
-        aantalZetten = 0;
-        label.text = @"Speler aan zet.";
+        [[vakjesLijst objectAtIndex:i] setTitle:nil forState:(UIControlStateNormal)];
     }
+    gewonnen = false;
+    gelijkspel = false;
+    aantalZetten = 0;
+    label.text = @"Nieuwe spel is gestart.";
 }
 
 -(IBAction)setMark:(id)sender
@@ -68,12 +71,12 @@
             {
                 return;
             }
-            [self slimmeZet];
+            [self smartComputerSetsMark];
         }
     }
 }
 
--(void)setMark2
+-(void)computerSetsMark
 {
     int r = random() % 9;
     //NSLog(@"%@", [[vakjesLijst objectAtIndex:r] curentTitle]);
@@ -93,7 +96,7 @@
     return [[vakjesLijst objectAtIndex:nummer] currentTitle];
 }
 
--(void)slimmeZet{
+-(void)smartComputerSetsMark{
     NSLog(@"Slimme zet begin");
     
     BOOL beatme = NO;
@@ -300,7 +303,7 @@
     //geen slimme zet, random
     else {
         NSLog(@"Slimme zet niet gelukt, random nu!");
-        [self setMark2];
+        [self computerSetsMark];
     }
     aantalZetten++;
     [self checkIfWon:@"O"];
@@ -313,8 +316,6 @@
     if(aantalZetten >8)
     {
         [label setText:@"Gelijkspel!"];
-        NSLog(@"Gelijkspel");
-        [btnPlay setTitle:@"Speel nog een keer" forState: (UIControlStateNormal)];
         gelijkspel = true;
         return true;
     }
@@ -323,8 +324,6 @@
         NSString *temp = [[NSString alloc] initWithFormat:@"Hoera speler %@ heeft gewonnen", playerType];
         [label setText:temp];
         [temp release];
-        NSLog(@"Hoera speler %@ heeft gewonnen", playerType);
-        [btnPlay setTitle:@"Speel nog een keer" forState: (UIControlStateNormal)];
         gewonnen = true;
         return true;
     }
@@ -344,8 +343,6 @@
             NSString *temp = [[NSString alloc] initWithFormat:@"Hoera speler %@ heeft gewonnen", playerType];
             [label setText:temp];
             [temp release];
-            NSLog(@"Hoera speler %@ heeft gewonnen", playerType);
-            [btnPlay setTitle:@"Speel nog een keer" forState: (UIControlStateNormal)];
             gewonnen = true;
             return true;
         }
@@ -365,8 +362,6 @@
         }
         if(hoeveelheidGemarkeerdeVakjes == 3)
         {
-            [btnPlay setTitle:@"Speel nog een keer" forState: (UIControlStateNormal)];
-            NSLog(@"Hoera speler %@ heeft gewonnen", playerType);
             NSString *temp = [[NSString alloc] initWithFormat:@"Hoera speler %@ heeft gewonnen", playerType];
             [label setText:temp];
             [temp release];
@@ -376,15 +371,6 @@
         hoeveelheidGemarkeerdeVakjes = 0;
     }
     return false;
-}
-
--(IBAction)setRandomMark:(id)sender
-{
-    
-    //[sender setTitle:@"X" forState:(UIControlStateNormal)];
-    //[(PointPtr)stringArray[2][0] setTitle:@"X" forState:(UIControlStateNormal)];
-    //[[vakjesLijst objectAtIndex:2] setTitle:@"X" forState:(UIControlStateNormal)];
-    //NSLog(@"%@", [vakjesLijst objectAtIndex:2]);
 }
 
 - (void)viewDidLoad

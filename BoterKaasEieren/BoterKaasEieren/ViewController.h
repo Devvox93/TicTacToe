@@ -45,11 +45,11 @@
 @property (nonatomic, retain) IBOutlet UILabel * label;
 @property (nonatomic, retain) IBOutlet UISegmentedControl * beatable;
 -(IBAction)init:(id)sender;
+-(IBAction)reset:(id)sender;
 -(IBAction)setMark: (id)sender;
--(void)setMark2;
+-(void)computerSetsMark;
 -(Boolean)checkIfWon:(NSString*)playerType;
--(IBAction)setRandomMark:(id)sender;
 -(void) vulVakje:(int)nummer :(NSString*)inhoud;
 -(NSString*) getVakje:(int)nummer;
--(void) slimmeZet;
+-(void) smartComputerSetsMark;
 @end
