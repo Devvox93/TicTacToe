@@ -29,7 +29,7 @@
 @synthesize label;
 @synthesize beatable;
 
--(IBAction)init:(id)sender
+- (void)start
 {
     vakjesLijst = [[NSMutableArray alloc]init];
     [vakjesLijst addObject:btn1];
@@ -44,9 +44,26 @@
     label.text = @"Speler begint.";
 }
 
+- (IBAction)manageButton:(id)sender
+{
+    if ([sender isEqual:btnPlay]) {
+        [self reset];
+    } else if ([sender isEqual:beatable]) {
+        UIActionSheet * alert = [[UIActionSheet alloc] initWithTitle:@"Nieuw spel?" delegate:self cancelButtonTitle:@"Annuleer." destructiveButtonTitle:@"OK." otherButtonTitles: nil];
+        [alert showInView:self.view];
+        [alert release];
+    } else if(!gewonnen && !gelijkspel && [sender currentTitle] == nil) {
+        [sender setTitle:@"X" forState:(UIControlStateNormal)];
+        aantalZetten++;
+        if([self checkIfWon: @"X"])
+        {
+            return;
+        }
+        [self smartComputerSetsMark];
+    }
+}
 
-
--(IBAction)reset:(id)sender
+- (void)reset
 {
     NSLog(@"Game gereset!");
     for(int i =0; i<[vakjesLijst count]; i++)
@@ -56,30 +73,12 @@
     gewonnen = false;
     gelijkspel = false;
     aantalZetten = 0;
-    label.text = @"Nieuwe spel is gestart.";
+    label.text = @"Nieuw spel is gestart.";
 }
 
--(IBAction)setMark:(id)sender
-{
-    if(!gewonnen && !gelijkspel)
-    {
-        if([sender currentTitle] == nil)
-        {
-            [sender setTitle:@"X" forState:(UIControlStateNormal)];
-            aantalZetten++;
-            if([self checkIfWon: @"X"])
-            {
-                return;
-            }
-            [self smartComputerSetsMark];
-        }
-    }
-}
-
--(void)computerSetsMark
+- (void)computerSetsMark
 {
     int r = random() % 9;
-    //NSLog(@"%@", [[vakjesLijst objectAtIndex:r] curentTitle]);
     while([[vakjesLijst objectAtIndex:r] currentTitle] != nil)
     {
         r = random() % 9;
@@ -87,16 +86,16 @@
     [[vakjesLijst objectAtIndex:r] setTitle:@"O" forState:(UIControlStateNormal)];
 }
 
--(void) vulVakje:(int)nummer :(NSString *)inhoud {
+- (void)vulVakje:(int)nummer :(NSString *)inhoud {
     NSLog(@"Vakje %i: %@", nummer, inhoud);
     [[vakjesLijst objectAtIndex:nummer] setTitle:inhoud forState:(UIControlStateNormal)];
 }
 
--(NSString*)getVakje:(int)nummer {
+- (NSString *)getVakje:(int)nummer {
     return [[vakjesLijst objectAtIndex:nummer] currentTitle];
 }
 
--(void)smartComputerSetsMark{
+- (void)smartComputerSetsMark{
     NSLog(@"Slimme zet begin");
     
     BOOL beatme = NO;
@@ -290,6 +289,38 @@
     else if(beatme && [self getVakje:4] == nil) {
         [self vulVakje:4 :@"O"];
     }
+    //probeer een "vork" tegen te houden
+    else if (beatme && [[self getVakje:0] isEqual:@"X"] && [[self getVakje:8] isEqual:@"X"] && ([self getVakje:1] == nil || [self getVakje:3] == nil || [self getVakje:5] == nil || [self getVakje:7] == nil )) {
+        if ([self getVakje:1] == nil) {
+            [self vulVakje:1 :@"O"];
+        } else if ([self getVakje:3] == nil) {
+            [self vulVakje:3 :@"O"];
+        } else if ([self getVakje:5] == nil) {
+            [self vulVakje:5 :@"O"];
+        } else if ([self getVakje:7] == nil) {
+            [self vulVakje:7 :@"O"];
+        }
+    } else if (beatme && [[self getVakje:2] isEqual:@"X"] && [[self getVakje:6] isEqual:@"X"] && ([self getVakje:1] == nil || [self getVakje:3] == nil || [self getVakje:5] == nil || [self getVakje:7] == nil )) {
+        if ([self getVakje:1] == nil) {
+            [self vulVakje:1 :@"O"];
+        } else if ([self getVakje:3] == nil) {
+            [self vulVakje:3 :@"O"];
+        } else if ([self getVakje:5] == nil) {
+            [self vulVakje:5 :@"O"];
+        } else if ([self getVakje:7] == nil) {
+            [self vulVakje:7 :@"O"];
+        }
+    }
+    //probeer tegenovergestelde hoek te vullen
+    else if (beatme && [self getVakje:0] == nil && [[self getVakje:8] isEqual:@"X"]) {
+        [self vulVakje:0 :@"O"];
+    } else if (beatme && [self getVakje:8] == nil && [[self getVakje:0] isEqual:@"X"]) {
+        [self vulVakje:8 :@"O"];
+    } else if (beatme && [self getVakje:2] == nil && [[self getVakje:6] isEqual:@"X"]) {
+        [self vulVakje:2 :@"O"];
+    } else if (beatme && [self getVakje:6] == nil && [[self getVakje:2] isEqual:@"X"]) {
+        [self vulVakje:6 :@"O"];
+    }
     //probeer een hoek te vullen
     else if(beatme && [self getVakje:0] == nil) {
         [self vulVakje:0 :@"O"];
@@ -310,15 +341,16 @@
 }
 
 
--(Boolean)checkIfWon:(NSString*)playerType
+- (Boolean)checkIfWon:(NSString *)playerType
 {
     int hoeveelheidGemarkeerdeVakjes = 0;
-    if(aantalZetten >8)
+    if(aantalZetten > 8)
     {
         [label setText:@"Gelijkspel!"];
         gelijkspel = true;
         return true;
     }
+    //check voor \ en /
     if(([[vakjesLijst objectAtIndex:0] currentTitle] == playerType && [[vakjesLijst objectAtIndex:4] currentTitle] == playerType & [[vakjesLijst objectAtIndex:8] currentTitle] == playerType) || ([[vakjesLijst objectAtIndex:2] currentTitle] == playerType && [[vakjesLijst objectAtIndex:4] currentTitle] == playerType && [[vakjesLijst objectAtIndex:6] currentTitle] == playerType))
     {
         NSString *temp = [[NSString alloc] initWithFormat:@"Hoera speler %@ heeft gewonnen", playerType];
@@ -327,6 +359,7 @@
         gewonnen = true;
         return true;
     }
+    //check voor verticaal
     for(int i = 0; i<3; i++)
     {
         //NSLog(@"1");
@@ -348,7 +381,7 @@
         }
         hoeveelheidGemarkeerdeVakjes = 0;
     }
-    
+    //check voor horizontaal
     for(int i = 0; i<9; i=i+3)
     {
         //NSLog(@"3");
@@ -373,10 +406,25 @@
     return false;
 }
 
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == [actionSheet cancelButtonIndex])
+    {
+        if([beatable selectedSegmentIndex] == 1) {
+            [beatable setSelectedSegmentIndex:0];
+        } else {
+            [beatable setSelectedSegmentIndex:1];
+        }
+        
+    } else {
+        [self reset];
+    }
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self init:nil];
+    [self start];
 	// Do any additional setup after loading the view, typically from a nib.
 }
 

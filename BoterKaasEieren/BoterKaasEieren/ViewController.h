@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <UIActionSheetDelegate>
 {
     //NSArray * vakjes;
     //NSString * stringArray[3][3];
@@ -29,27 +29,30 @@
     UILabel * label;
     UISegmentedControl * beatable;
 }
-@property(nonatomic, assign)int aantalZetten;
-@property(nonatomic, assign)Boolean gelijkspel;
-@property(nonatomic, retain)IBOutlet UIButton * btnPlay;
-@property(nonatomic, assign)Boolean  gewonnen;
-@property(nonatomic, retain)IBOutlet UIButton * btn1;
-@property(nonatomic, retain)IBOutlet UIButton * btn2;
-@property(nonatomic, retain)IBOutlet UIButton * btn3;
-@property(nonatomic, retain)IBOutlet UIButton * btn4;
-@property(nonatomic, retain)IBOutlet UIButton * btn5;
-@property(nonatomic, retain)IBOutlet UIButton * btn6;
-@property(nonatomic, retain)IBOutlet UIButton * btn7;
-@property(nonatomic, retain)IBOutlet UIButton * btn8;
-@property(nonatomic, retain)IBOutlet UIButton * btn9;
+
+@property (nonatomic, assign) int aantalZetten;
+@property (nonatomic, assign) Boolean gelijkspel;
+@property (nonatomic, retain) IBOutlet UIButton * btnPlay;
+@property (nonatomic, assign) Boolean  gewonnen;
+@property (nonatomic, retain) IBOutlet UIButton * btn1;
+@property (nonatomic, retain) IBOutlet UIButton * btn2;
+@property (nonatomic, retain) IBOutlet UIButton * btn3;
+@property (nonatomic, retain) IBOutlet UIButton * btn4;
+@property (nonatomic, retain) IBOutlet UIButton * btn5;
+@property (nonatomic, retain) IBOutlet UIButton * btn6;
+@property (nonatomic, retain) IBOutlet UIButton * btn7;
+@property (nonatomic, retain) IBOutlet UIButton * btn8;
+@property (nonatomic, retain) IBOutlet UIButton * btn9;
 @property (nonatomic, retain) IBOutlet UILabel * label;
 @property (nonatomic, retain) IBOutlet UISegmentedControl * beatable;
--(IBAction)init:(id)sender;
--(IBAction)reset:(id)sender;
--(IBAction)setMark: (id)sender;
--(void)computerSetsMark;
--(Boolean)checkIfWon:(NSString*)playerType;
--(void) vulVakje:(int)nummer :(NSString*)inhoud;
--(NSString*) getVakje:(int)nummer;
--(void) smartComputerSetsMark;
+
+- (void)start;
+- (IBAction)manageButton:(id)sender;
+- (void)reset;
+- (void)computerSetsMark;
+- (Boolean)checkIfWon:(NSString*)playerType;
+- (void)vulVakje:(int)nummer :(NSString*)inhoud;
+- (NSString *)getVakje:(int)nummer;
+- (void)smartComputerSetsMark;
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex;
 @end
